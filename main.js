@@ -89,9 +89,10 @@ canvas.height = window.innerHeight
       },
     }
 
-    const SPEED = 3
+    const SPEED = 6
     const ROTATE_SPEED = 0.05
     const FRICTION = .97
+    const PROJECTILE_SPEED = 10
 
     const projectiles = []
 
@@ -135,12 +136,12 @@ canvas.height = window.innerHeight
         case 'Space':
           projectiles.push(new Projectile({
             position: {
-              x: player.position.x,
-              y: player.position.y
+              x: player.position.x + Math.cos(player.rotation) * 30, // pour tirer depuis le bout du vaisseau
+              y: player.position.y + Math.sin(player.rotation) * 30
             },
             velocity: {
-              x: 1,
-              y: 0,
+              x: Math.cos(player.rotation) * PROJECTILE_SPEED, // direction du tire + vitesse
+              y: Math.sin(player.rotation) * PROJECTILE_SPEED,
             }
           }))
           break
